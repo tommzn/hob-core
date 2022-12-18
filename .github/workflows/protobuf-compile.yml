@@ -61,7 +61,7 @@ jobs:
         if: ${{ success() }}
         env:
           BRANCH: proto-${{ github.run_id }}-${{ github.run_attempt }}
-          USERNAME: ${{ env.GITHUB_TRIGGERING_ACTOR }}
+          USERNAME: ${{ github.actor }} 
         run: |
           git config --global user.name $USERNAME
           git checkout -b "$BRANCH"
