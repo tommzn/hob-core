@@ -67,3 +67,4 @@ jobs:
           git checkout -b "$BRANCH"
           git add -A
           git commit -am "Protobuf schema changed"
+          git push origin "$BRANCH"
