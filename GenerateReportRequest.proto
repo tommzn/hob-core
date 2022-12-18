@@ -1,0 +1,72 @@
+// HomeDashboard Indoor Climate Event Schema.
+
+syntax = "proto3";
+package core;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = ".;core";
+
+// GenerateReportRequest is used to trigger report generation.
+message GenerateReportRequest {
+    
+    // Format a report should be generated in.
+    ReportFormat Format = 1;
+
+    // Type defines which kind of report should be generated.
+    ReportType Type = 2;
+
+    // Year a report shoul be generated for.
+    int Year = 3;
+
+    // Month a report shoul be generated for.
+    int Month = 4;
+
+    // NamePattern defined a template for report file names.
+    string NamePattern = 5;
+
+    // Delivery defines targets a eport should be send to.
+    ReportDelivery Delivery = 6;  
+
+}
+
+// ReportDelivery defines different targets a report can be disributed to.
+message ReportDelivery {
+
+    // S3 defeines target bucket in AWS S4 a report should be uploaded to.
+    S3Target S3 = 1;
+
+    // Mail defines settings to send a report via email.
+    MailTarget Mail = 2;
+
+}
+
+// S3Target defines settings to upload a report to an AWS S3 bucket.
+message S3Target {
+
+    // Region is a AWS region of a S3 bucket.
+    string Region = 1;
+
+    // Bucket defines the name of a S3 bucket.
+    string Bucket = 2;
+
+    // Path defines a optional prefix path.
+    string Path = 3;
+}
+
+// MailTarget contains settings for mail delivery.
+message MailTarget {
+
+    // ToAddresses provides a list of email receiver.
+    repeated string ToAddresses = 1;
+}
+
+// ReportType defines which kind of report should be generated.
+enum ReportType {
+    MONTHLY_REPORT = 1;
+  }
+
+// ReportFormat defines the format a report should be generated.
+enum ReportFormat {
+    EXCEL = 1;
+}

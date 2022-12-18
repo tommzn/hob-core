@@ -1,0 +1,65 @@
+name: Protobuf Compile
+on:
+  push:
+    branches:
+      - main
+      
+jobs:
+  compile-go:
+    name: Compile Protobuf for Golang
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.16
+      - name: Go Env Setup
+        run: |
+          export GOPATH=$HOME/go
+          export GOBIN=$(go env GOPATH)/bin
+          export PATH=$PATH:$GOPATH
+          export PATH=$PATH:$GOBIN
+          export GO111MODULE=on
+      - name: Install Protobuf compiler
+        run: |
+          sudo apt-get install -y protobuf-compiler
+          go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+          protoc --version 
+      - name: Checkout Protobuf event defs
+        uses: actions/checkout@v2
+      - name: Compile
+        run: protoc --go_out=./ *.proto
+      - name: Upload Golang artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: golang-events
+          path: ./*.pb.go
+          retention-days: 1
+
+  deploy-go:
+    name: Publish Golang Protobuf
+    runs-on: ubuntu-latest
+    needs: compile-go
+    continue-on-error: true
+    steps:
+      - name: Checkout Golang events lib
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ env.GOLANG_EVENTS_REPO }}
+          ref: main
+      - name: Download Golang events
+        uses: actions/download-artifact@v2
+        with:
+          name: golang-events
+      - name: Check for changes
+        run: |
+          git add -N .
+          ! git diff --quiet
+      - name: Publish changes to new branch
+        if: ${{ success() }}
+        env:
+          BRANCH: proto-${{ github.run_id }}-${{ github.run_attempt }}
+        run: |
+          git checkout -b "BRANCH"
+          git add -A
+          git commit -am "Protobuf schema changed"
