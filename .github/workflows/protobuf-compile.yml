@@ -9,6 +9,8 @@ jobs:
     name: Compile Protobuf for Golang
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Protobuf event defs
+        uses: actions/checkout@v2
       - name: Get Go version
         run: echo "goversion=`egrep -i '^go [1-2][.][0-9]+$' go.mod | sed 's/go //' | sed 's/$/.x/'`" >> $GITHUB_ENV
       - name: Install Go
@@ -27,8 +29,6 @@ jobs:
           sudo apt-get install -y protobuf-compiler
           go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
           protoc --version 
-      - name: Checkout Protobuf event defs
-        uses: actions/checkout@v2
       - name: Compile
         run: protoc --go_out=./ *.proto
       - name: Upload Golang artifacts

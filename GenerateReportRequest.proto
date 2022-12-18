@@ -3,8 +3,6 @@
 syntax = "proto3";
 package core;
 
-import "google/protobuf/timestamp.proto";
-
 option go_package = ".;core";
 
 // GenerateReportRequest is used to trigger report generation.
