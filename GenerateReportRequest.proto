@@ -17,10 +17,10 @@ message GenerateReportRequest {
     ReportType Type = 2;
 
     // Year a report shoul be generated for.
-    int Year = 3;
+    int64 Year = 3;
 
     // Month a report shoul be generated for.
-    int Month = 4;
+    int64 Month = 4;
 
     // NamePattern defined a template for report file names.
     string NamePattern = 5;
