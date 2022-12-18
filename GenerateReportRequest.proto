@@ -63,12 +63,12 @@ message MailTarget {
 
 // ReportType defines which kind of report should be generated.
 enum ReportType {
-    NONE = 0;
+    NO_TYPE = 0;
     MONTHLY_REPORT = 1;
   }
 
 // ReportFormat defines the format a report should be generated.
 enum ReportFormat {
-    NONE = 0;
+    NO_FORMAT = 0;
     EXCEL = 1;
 }
