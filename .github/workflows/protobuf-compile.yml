@@ -62,8 +62,7 @@ jobs:
         env:
           BRANCH: proto-${{ github.run_id }}-${{ github.run_attempt }}
         run: |
-          env
-          git config --global user.name $USERNAME
+          git config --global user.name ${{ env.GITHUB_TRIGGERING_ACTOR }}
           git checkout -b "$BRANCH"
           git add -A
           git commit -am "Protobuf schema changed"
