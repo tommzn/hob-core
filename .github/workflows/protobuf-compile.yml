@@ -44,8 +44,6 @@ jobs:
     needs: compile-go
     continue-on-error: true
     steps:
-      - name: Env 
-        run: env
       - name: Checkout Golang events lib
         uses: actions/checkout@v2
       - name: Download Golang events
