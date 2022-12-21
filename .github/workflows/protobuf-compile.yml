@@ -71,4 +71,5 @@ jobs:
       - name: Create Pull Request
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: ${{ steps.vars.outputs.tag }}
         run: gh pr create -B main -H "$BRANCH" --title "Merge Protobuf Compile from $BRANCH to main" --body "Created by GitHub Actions!"
