@@ -68,3 +68,5 @@ jobs:
           git add *pb.go
           git commit -am "Protobuf schema changed"
           git push origin "$BRANCH"
+      - name: Create Pull Request
+        run: gh pr create -B main -H "$BRANCH" --title "Merge Protobuf Compile from $BRANCH to main" --body "Created by GitHub Actions!"
