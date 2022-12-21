@@ -57,10 +57,10 @@ jobs:
       - name: Publish changes to new branch
         if: ${{ success() }}
         env:
-          BRANCH: ${{ env.GITHUB_REF_NAME }}
-          USERNAME: ${{ github.actor }} 
+          BRANCH: ${GITHUB_REF#refs/*/}
+          USERNAME: ${{ github.actor }}  
         run: |
-          env
+          echo "Create new branch: $BRANCH"
           git config --global user.name $USERNAME
           git checkout -b "$BRANCH"
           git add -A
