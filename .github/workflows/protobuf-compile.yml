@@ -42,6 +42,7 @@ jobs:
     name: Publish Golang Protobuf
     runs-on: ubuntu-latest
     needs: compile-go
+    continue-on-error: true
     steps:
       - name: Env 
         run: env
