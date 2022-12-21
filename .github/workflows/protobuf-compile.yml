@@ -1,8 +1,5 @@
 name: Protobuf Compile
 on:
-  push:
-    branches:
-      - main
   create:
     tags:
       - proto-v*
@@ -56,7 +53,7 @@ jobs:
           name: golang-events
       - name: Publish changes to new branch
         env:
-          BRANCH: proto-${{ github.run_id }}-${{ github.run_attempt }}
+          BRANCH: ${{ env.GITHUB_REF_NAME }}
           USERNAME: ${{ github.actor }} 
         run: |
           git config --global user.name $USERNAME
