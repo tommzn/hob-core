@@ -56,9 +56,8 @@ jobs:
         run: |
           git add -N .
           ! git diff --quiet
-      - name: Update Repository
-        if: ${{ success() }}
       - name: Publish changes to new branch
+        if: ${{ success() }}
         env:
           BRANCH: ${{ env.GITHUB_REF_NAME }}
           USERNAME: ${{ github.actor }} 
