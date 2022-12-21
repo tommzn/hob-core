@@ -54,10 +54,13 @@ jobs:
         run: |
           git add -N .
           ! git diff --quiet
+      - name: Set output
+        id: vars
+        run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
       - name: Publish changes to new branch
         if: ${{ success() }}
         env:
-          BRANCH: ${GITHUB_REF#refs/*/}
+          BRANCH: ${{ steps.vars.outputs.tag }}
           USERNAME: ${{ github.actor }}  
         run: |
           echo "Create new branch: $BRANCH"
