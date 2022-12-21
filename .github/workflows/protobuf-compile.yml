@@ -60,6 +60,7 @@ jobs:
           BRANCH: ${{ env.GITHUB_REF_NAME }}
           USERNAME: ${{ github.actor }} 
         run: |
+          env
           git config --global user.name $USERNAME
           git checkout -b "$BRANCH"
           git add -A
