@@ -56,7 +56,7 @@ jobs:
           ! git diff --quiet
       - name: Set output
         id: vars
-        run: echo "tag=autogen-${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
+        run: echo "tag=autogen/${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
       - name: Publish changes to new branch
         if: ${{ success() }}
         env:
