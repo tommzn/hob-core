@@ -52,6 +52,12 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: golang-events
+      - name: Check for Changes
+        run: |
+          git add -N .
+          ! git diff --quiet
+      - name: Update Repository
+        if: ${{ success() }}
       - name: Publish changes to new branch
         env:
           BRANCH: ${{ env.GITHUB_REF_NAME }}
