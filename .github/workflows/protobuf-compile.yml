@@ -1,9 +1,11 @@
 name: Protobuf Compile
 on:
+  push:
+    branches:
+      - main
   create:
     tags:
-      #- proto-v*
-      - main
+      - proto-v*
       
 jobs:
   compile-go:
