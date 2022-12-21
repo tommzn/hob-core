@@ -56,16 +56,15 @@ jobs:
           ! git diff --quiet
       - name: Set output
         id: vars
-        run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
+        run: echo "tag=autogen-${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
       - name: Publish changes to new branch
         if: ${{ success() }}
         env:
           BRANCH: ${{ steps.vars.outputs.tag }}
           USERNAME: ${{ github.actor }}  
         run: |
-          echo "Create new branch: $BRANCH"
           git config --global user.name $USERNAME
           git checkout -b "$BRANCH"
-          git add -A
+          git add *pb.go
           git commit -am "Protobuf schema changed"
           git push origin "$BRANCH"
