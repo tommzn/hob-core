@@ -31,12 +31,12 @@ func (suite *QueueTestSuite) TestSerializeAndDeserialize() {
 		},
 	}
 
-	data, err := serializeEvent(event)
+	data, err := SerializeEvent(event)
 	suite.Nil(err)
 	suite.True(len(data) > 10)
 
 	event2 := &GenerateReportRequest{}
-	suite.Nil(deserializeEvent(data, event2))
+	suite.Nil(DeserializeEvent(data, event2))
 
 	suite.Equal(event.Format, event2.Format)
 	suite.Equal(event.Type, event2.Type)
