@@ -37,6 +37,9 @@ message ReportDelivery {
     // Mail defines settings to send a report via email.
     MailTarget Mail = 2;
 
+    // File defines settings to write reports to a local file.
+    FileTarget File = 3;
+
 }
 
 // S3Target defines settings to upload a report to an AWS S3 bucket.
@@ -58,6 +61,15 @@ message MailTarget {
     // ToAddresses provides a list of email receiver.
     repeated string ToAddresses = 1;
 }
+
+
+// FileTarget contains settings to write a report to a local file.
+message FileTarget {
+
+    // Prefix defines file name prefix.
+    string Prefix = 1;
+}
+
 
 // ReportType defines which kind of report should be generated.
 enum ReportType {
