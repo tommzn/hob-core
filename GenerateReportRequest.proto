@@ -66,8 +66,8 @@ message MailTarget {
 // FileTarget contains settings to write a report to a local file.
 message FileTarget {
 
-    // Prefix defines file name prefix.
-    string Prefix = 1;
+    // Path defines localtion where a file should be placed.
+    string Path = 1;
 }
 
 
