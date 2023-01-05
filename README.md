@@ -15,6 +15,20 @@ This event is used to trigger report generattion from different sources.
 ## Helper
 This package provides serialize/deserialize helper to publish and consume events in Protobuf format.
 
+## Change event schema
+### Checkout new branch
+```
+git checkout -b proto-v1.0.x
+```
+### Commit and push your changes
+Commit and push your changes in feature branch. This will create a PR you can merge vit GitHub. Do not forget to add a merge comment starting with "fix: " to ensure a new 
+release is generated after merging.
+```
+git add .
+git commit -m "Update/Add event schema"
+git push origin proto-v1.0.x
+```
+
 # Links
 [HomeOffice Button - Time Tracking](https://github.com/tommzn/hob-timetracker)  
 [AWS IoT 1-Click](https://aws.amazon.com/iot-1-click/?nc1=h_ls)  
