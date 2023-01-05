@@ -26,6 +26,10 @@ message GenerateReportRequest {
     // Delivery defines targets a eport should be send to.
     ReportDelivery Delivery = 6;  
 
+    // DeviceIds is a list of devices if which captured time tracking records should
+    // be used to generate a report.
+    repeated string DeviceIds = 7;
+
 }
 
 // ReportDelivery defines different targets a report can be disributed to.
